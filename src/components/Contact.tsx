@@ -73,7 +73,7 @@ const Contact = () => {
                       <div className="flex flex-col space-y-3 mt-4">
                         <a href="mailto:contact@diic.ae" className="flex items-center text-white/80 hover:text-white transition-colors mobile-touch-target">
                           <Mail className="h-5 w-5 mr-2" />
-                          <span>contact@diic.ae</span>
+                          <span>chairman@theindiancentre.com</span>
                         </a>
                         
                         <a href="tel:+97142123456" className="flex items-center text-white/80 hover:text-white transition-colors mobile-touch-target">
