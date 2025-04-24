@@ -52,8 +52,7 @@ const ServicesCarousel: React.FC<ServicesCarouselProps> = ({ services, className
           align: "start",
           loop: true,
         }}
-        setActiveIndex={setActiveIndex}
-        activeIndex={activeIndex}
+        // Remove the setActiveIndex and activeIndex props as they don't exist on Carousel
       >
         <CarouselContent>
           {services.map((service, index) => (
