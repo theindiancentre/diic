@@ -36,6 +36,7 @@ export function updateScrollProgress(): void {
 
 /**
  * Initialize scroll event listeners for the page
+ * @returns A cleanup function to remove event listeners
  */
 export function initScrollHandlers(): () => void {
   // Set up scroll progress indicator
@@ -44,7 +45,7 @@ export function initScrollHandlers(): () => void {
   // Set up initial scroll position check
   document.addEventListener('DOMContentLoaded', updateScrollProgress);
   
-  // Clean up on component unmount if being used in a component
+  // Return cleanup function
   return () => {
     window.removeEventListener('scroll', updateScrollProgress);
   };

@@ -1,6 +1,5 @@
 
 import React from 'react';
-import ScrollCue from './ScrollCue';
 
 interface SplitSectionProps {
   leftContent: React.ReactNode;
@@ -21,21 +20,13 @@ const SplitSection: React.FC<SplitSectionProps> = ({
 }) => {
   return (
     <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${className}`}>
-      <ScrollCue 
-        direction={reverse ? 'right' : 'left'} 
-        className={`${reverse ? 'md:order-2' : ''} ${leftClassName}`}
-        delay={100}
-      >
+      <div className={`${reverse ? 'md:order-2' : ''} ${leftClassName}`}>
         {leftContent}
-      </ScrollCue>
+      </div>
       
-      <ScrollCue 
-        direction={reverse ? 'left' : 'right'} 
-        className={`${reverse ? 'md:order-1' : ''} ${rightClassName}`}
-        delay={300}
-      >
+      <div className={`${reverse ? 'md:order-1' : ''} ${rightClassName}`}>
         {rightContent}
-      </ScrollCue>
+      </div>
     </div>
   );
 };
