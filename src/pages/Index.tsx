@@ -23,7 +23,7 @@ const Index = () => {
     document.body.classList.add('page-loaded');
 
     // Initialize scroll handlers including progress bar
-    const cleanup = initScrollHandlers();
+    const cleanupScrollHandlers = initScrollHandlers();
 
     // Track scroll position for animations with performance optimization
     const handleScroll = () => {
@@ -56,7 +56,7 @@ const Index = () => {
       // Cleanup
       window.removeEventListener('scroll', handleScroll);
       document.body.classList.remove('page-loaded');
-      cleanup();
+      if (cleanupScrollHandlers) cleanupScrollHandlers();
     };
   }, []);
 

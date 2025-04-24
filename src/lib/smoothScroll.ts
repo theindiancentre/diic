@@ -37,7 +37,7 @@ export function updateScrollProgress(): void {
 /**
  * Initialize scroll event listeners for the page
  */
-export function initScrollHandlers(): void {
+export function initScrollHandlers(): () => void {
   // Set up scroll progress indicator
   window.addEventListener('scroll', updateScrollProgress);
   
