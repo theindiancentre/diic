@@ -7,6 +7,8 @@ interface IntersectionObserverProps {
   rootMargin?: string;
   className?: string;
   animationClass?: string;
+  delay?: string; // Support for animation delay
+  direction?: "up" | "down" | "left" | "right"; // Support for directional animations
 }
 
 const IntersectionObserver: React.FC<IntersectionObserverProps> = ({ 
@@ -14,7 +16,9 @@ const IntersectionObserver: React.FC<IntersectionObserverProps> = ({
   threshold = 0.1,
   rootMargin = "0px",
   className = "",
-  animationClass = "animate-fade-in"
+  animationClass = "animate-fade-in",
+  delay = "",
+  direction
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = React.useState(false);
@@ -42,10 +46,24 @@ const IntersectionObserver: React.FC<IntersectionObserverProps> = ({
     };
   }, [rootMargin, threshold]);
   
+  const getAnimationClass = () => {
+    if (direction) {
+      switch (direction) {
+        case "up": return "animate-fade-in-up";
+        case "down": return "animate-fade-in-down";
+        case "left": return "animate-fade-in-left";
+        case "right": return "animate-fade-in-right";
+        default: return animationClass;
+      }
+    }
+    return animationClass;
+  };
+  
   return (
     <div 
       ref={ref}
-      className={`${className} ${isVisible ? animationClass : 'opacity-0'}`}
+      className={`${className} ${isVisible ? getAnimationClass() : 'opacity-0'} ${delay}`}
+      style={{ transitionDelay: isVisible ? delay : "0ms" }}
     >
       {children}
     </div>
