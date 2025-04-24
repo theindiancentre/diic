@@ -54,13 +54,16 @@ export default {
           foreground: "hsl(var(--card-foreground))"
         },
         diic: {
-          blue: "#0d4c8b",
-          lightBlue: "#4a90e2",
-          deepBlue: "#002D62",
-          gold: "#D4AF37",
-          orange: "#FF7F50",
-          green: "#006747",
-          deepGreen: "#014421"
+          blue: "#0d4c8b",        /* Indian navy blue */
+          lightBlue: "#4a90e2",   /* Lighter accent blue */
+          deepBlue: "#002D62",    /* Deep navy blue */
+          gold: "#D4AF37",        /* Gold accent */
+          saffron: "#FF9933",     /* Indian flag saffron */
+          green: "#006747",       /* Shared green color from both flags */
+          deepGreen: "#014421",   /* Deeper green accent */
+          red: "#B02B2C",         /* UAE flag red */
+          cream: "#F8F0E3",       /* Neutral cream background */
+          neutral: "#E9E2D0"      /* Soft neutral accent */
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -117,7 +120,7 @@ export default {
         },
         "float": {
           "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" }
+          "50%": { transform: "translateY(-6px)" }
         },
         "spin-slow": {
           "0%": { transform: "rotate(0deg)" },
