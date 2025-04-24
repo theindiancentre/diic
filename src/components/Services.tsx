@@ -1,0 +1,184 @@
+
+import React, { useEffect, useRef, useState } from "react";
+import { 
+  Heart, Book, Home, Building, Briefcase, Coins, 
+  FileText, Globe, Image, Presentation, Trophy 
+} from "lucide-react";
+
+interface Service {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  color: string;
+}
+
+const Services = () => {
+  const [isConnectorVisible, setIsConnectorVisible] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
+  
+  const services: Service[] = [
+    {
+      title: "Healthcare",
+      description: "State-of-the-art medical facilities providing comprehensive care to the community.",
+      icon: <Heart className="h-6 w-6" />,
+      color: "text-red-500"
+    },
+    {
+      title: "Education",
+      description: "Excellence in learning with programs catering to all age groups and specializations.",
+      icon: <Book className="h-6 w-6" />,
+      color: "text-blue-500"
+    },
+    {
+      title: "Real Estate",
+      description: "Premium property solutions for residential and commercial requirements.",
+      icon: <Home className="h-6 w-6" />,
+      color: "text-emerald-500"
+    },
+    {
+      title: "Retail",
+      description: "Diverse shopping experiences featuring both local and international brands.",
+      icon: <Building className="h-6 w-6" />,
+      color: "text-amber-500"
+    },
+    {
+      title: "Insurance",
+      description: "Comprehensive coverage options safeguarding individuals and businesses.",
+      icon: <Briefcase className="h-6 w-6" />,
+      color: "text-indigo-500"
+    },
+    {
+      title: "Finance",
+      description: "Expert financial services including banking, investments, and wealth management.",
+      icon: <Coins className="h-6 w-6" />,
+      color: "text-green-500"
+    },
+    {
+      title: "Legal",
+      description: "Professional legal guidance for personal and business matters.",
+      icon: <FileText className="h-6 w-6" />,
+      color: "text-gray-700"
+    },
+    {
+      title: "Technology",
+      description: "Cutting-edge tech solutions and digital infrastructure services.",
+      icon: <Globe className="h-6 w-6" />,
+      color: "text-sky-500"
+    },
+    {
+      title: "Media",
+      description: "Creative content production and strategic communication services.",
+      icon: <Image className="h-6 w-6" />,
+      color: "text-purple-500"
+    },
+    {
+      title: "Culture",
+      description: "Vibrant celebrations of heritage through events and community programs.",
+      icon: <Presentation className="h-6 w-6" />,
+      color: "text-orange-500"
+    },
+    {
+      title: "Sports",
+      description: "World-class sporting facilities and recreational activities for all ages.",
+      icon: <Trophy className="h-6 w-6" />,
+      color: "text-yellow-500"
+    }
+  ];
+  
+  useEffect(() => {
+    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          if (entry.target.id === 'services-container') {
+            setIsConnectorVisible(true);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      threshold: 0.1
+    });
+
+    if (servicesRef.current) {
+      const elements = servicesRef.current.querySelectorAll('.reveal-text, .stagger-card, #services-container');
+      elements.forEach(el => observer.observe(el));
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section id="services" className="py-24 bg-gray-50" ref={servicesRef}>
+      <div className="container mx-auto px-4">
+        <h2 className="section-heading text-center mb-4">Integrated Services Ecosystem</h2>
+        <p className="reveal-text text-center text-gray-600 max-w-3xl mx-auto mb-16">
+          DIIC offers a comprehensive range of services under one unified platform, 
+          creating a seamlessly integrated ecosystem that enhances value for all stakeholders.
+        </p>
+        
+        {/* Central hub with connections */}
+        <div className="relative mb-16">
+          <div 
+            id="services-container" 
+            className={`relative mx-auto w-48 h-48 rounded-full flex items-center justify-center bg-white shadow-xl border-4 border-diic-gold ${isConnectorVisible ? 'connector-visible' : ''}`}
+          >
+            <img 
+              src="/lovable-uploads/bc32de25-b932-4514-8a51-7de37f2b74a3.png" 
+              alt="DIIC Logo" 
+              className="h-24 animate-pulse-slow"
+            />
+            
+            {/* SVG Connector Lines */}
+            <svg className="absolute top-0 left-0 w-full h-full z-0" viewBox="0 0 200 200">
+              {/* Top connection */}
+              <path d="M100,0 L100,50" className="path" fill="none" stroke="#D4AF37" strokeWidth="2" />
+              
+              {/* Right connection */}
+              <path d="M200,100 L150,100" className="path" fill="none" stroke="#D4AF37" strokeWidth="2" />
+              
+              {/* Bottom connection */}
+              <path d="M100,200 L100,150" className="path" fill="none" stroke="#D4AF37" strokeWidth="2" />
+              
+              {/* Left connection */}
+              <path d="M0,100 L50,100" className="path" fill="none" stroke="#D4AF37" strokeWidth="2" />
+              
+              {/* Diagonal connections */}
+              <path d="M35,35 L65,65" className="path" fill="none" stroke="#D4AF37" strokeWidth="2" />
+              <path d="M165,35 L135,65" className="path" fill="none" stroke="#D4AF37" strokeWidth="2" />
+              <path d="M35,165 L65,135" className="path" fill="none" stroke="#D4AF37" strokeWidth="2" />
+              <path d="M165,165 L135,135" className="path" fill="none" stroke="#D4AF37" strokeWidth="2" />
+            </svg>
+          </div>
+        </div>
+        
+        {/* Services grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-16">
+          {services.map((service, index) => (
+            <div 
+              key={index} 
+              className={`service-card stagger-card opacity-0 animate-fade-in`}
+            >
+              <div className={`mb-4 ${service.color}`}>
+                {service.icon}
+              </div>
+              <h3 className="text-xl font-semibold text-diic-blue mb-2">{service.title}</h3>
+              <p className="text-gray-600">{service.description}</p>
+            </div>
+          ))}
+        </div>
+        
+        {/* Bottom text */}
+        <div className="mt-16 text-center reveal-text">
+          <p className="italic text-gray-600 max-w-2xl mx-auto">
+            Each service within the DIIC ecosystem is designed to complement and enhance the others,
+            creating a seamless experience for all users and maximizing value creation.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Services;
